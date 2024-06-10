@@ -1,0 +1,7 @@
+.nav-link-custom {
+    color: rgb(32, 19, 19)!important; /* Force le texte des liens de navigation à être blanc */
+  }
+  
+  .navbar-dark .navbar-brand {
+    color: rgb(32, 19, 19) !important; /* Force le texte de la marque de navigation à être blanc */
+  }
