@@ -1,0 +1,10 @@
+# Ignore node_modules for all layers
+api/node_modules/
+my-app-mob/node_modules/
+my-app-web/node_modules/
+
+# Ignore other common files and directories
+*.log
+.env
+dist/
+build/
