@@ -1,0 +1,25 @@
+---
+- name: Deploy applications
+  hosts: all
+  tasks:
+    - name: Pull latest Docker image
+      become: yes
+      ansible.builtin.docker_image:
+        name: "{{ item }}"
+        source: pull
+      with_items:
+        - docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-api:latest
+        - docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-my-app-web:latest
+        - docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-my-app-mob:latest
+
+    - name: Run Docker containers
+      become: yes
+      ansible.builtin.docker_container:
+        name: "{{ item.name }}"
+        image: "{{ item.image }}"
+        state: started
+        restart_policy: always
+      with_items:
+        - { name: "api", image: "docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-api:latest" }
+        - { name: "web", image: "docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-my-app-web:latest" }
+        - { name: "mobile", image: "docker.io/{{ secrets.DOCKER_USERNAME }}/projet_asd-my-app-mob:latest" }

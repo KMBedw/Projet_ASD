@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: sampledb
+    depends_on:
+      - mysql
+
+  my-app-web:
+    build: ./my-app-web
+    ports:
+      - "3001:3000"
+    environment:
+      - REACT_APP_API_URL=http://api:3000
+
+  my-app-mob:
+    build: ./my-app-mob
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+    environment:
+      - API_URL=http://api:3000
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sampledb

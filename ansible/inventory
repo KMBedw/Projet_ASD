@@ -1,0 +1,8 @@
+[web]
+web-server ansible_host=<WEB_SERVER_IP> ansible_user=ubuntu
+
+[api]
+api-server ansible_host=<API_SERVER_IP> ansible_user=ubuntu
+
+[mobile]
+mobile-server ansible_host=<MOBILE_SERVER_IP> ansible_user=ubuntu
